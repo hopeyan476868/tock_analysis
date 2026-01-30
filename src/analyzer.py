@@ -1,9 +1,8 @@
-# =========================
 # src/analyzer.py
-# =========================
-from market_fetcher import MarketFetcher
-from brooks_engine import BrooksEngine
-from report_builder import ReportBuilder
+
+from src.market_fetcher import MarketFetcher
+from src.brooks_engine import BrooksEngine
+from src.report_builder import ReportBuilder
 
 
 def analyze(symbol: str) -> str:
