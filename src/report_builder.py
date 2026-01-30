@@ -1,20 +1,26 @@
+# =========================
 # src/report_builder.py
+# =========================
 class ReportBuilder:
-
     @staticmethod
-    def build(profile, brooks_result):
-        decision = "观望"
-        if brooks_result["type"] == "BUY":
-            decision = "买入"
-        elif brooks_result["type"] == "SELL":
-            decision = "卖出"
+    def build(profile: dict, analysis: dict) -> str:
+        pa = analysis["price_action"]
+
+        if pa["allow_trade"]:
+            decision_line = f"✅ 允许交易：{pa['signal']['type']}"
+        else:
+            decision_line = "🚫 当前不可交易（仅研究备忘）"
 
         return f"""
 🎯 {profile['code']}（{profile['name']}）
 
-📌 市场判断：{decision}
-📐 价格行为：{brooks_result['reason']}
+📌 技术裁决（Price Action）
+{decision_line}
 
-一句话：
-这是一个基于 Al Brooks 价格行为的判断结果。
+原因：
+{pa['reason']}
+
+说明：
+本结论基于价格行为系统判断。
+若不可交易，仅用于研究与跟踪，不构成交易建议。
 """
